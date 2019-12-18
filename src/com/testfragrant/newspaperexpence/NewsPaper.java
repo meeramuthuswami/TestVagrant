@@ -1,105 +1,243 @@
 package com.testfragrant.newspaperexpence;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-public interface NewsPaper {
+public abstract class NewsPaper {
 	
-}
-
-class Calculate
-{
-	public static void main(String main[])
+	public static double getDay(Object newsPaper, String day)
 	{
-		
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		
-		Calendar orginalCal = Calendar.getInstance();
-		Calendar cal = Calendar.getInstance();
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		
-		while(dayOfWeek-- >1)
+		if (newsPaper instanceof TOI)
 		{
-		cal.add(Calendar.DAY_OF_WEEK, -1 );
-		System.out.print(cal.getTime());
-		
-		System.out.println("-->" + cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-		map.put(cal.get(Calendar.DAY_OF_WEEK), cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-		}
-		cal = orginalCal;
-		dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		System.out.print(cal.getTime());
-		System.out.println("-->" + cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-		map.put(cal.get(Calendar.DAY_OF_WEEK), cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-        boolean isLastDay = cal.get(Calendar.DATE) == cal.getActualMaximum(Calendar.DATE) ? false:true;
-       
-		while(isLastDay && dayOfWeek <7)
+			return TOI.getDay(day);
+			
+		}else if (newsPaper instanceof HINDU)
 		{
-		cal.add(Calendar.DAY_OF_WEEK, 1 );
-		System.out.print(cal.getTime());
-		
-		System.out.println("-->" + cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-		dayOfWeek ++;
-		
-		if ((cal.get(Calendar.DATE) == cal.getActualMaximum(Calendar.DATE)))
+			return HINDU.getDay(day);
+		}else if (newsPaper instanceof HT)
 		{
-		break;
-		}
-		map.put(cal.get(Calendar.DAY_OF_WEEK), cal.getActualMaximum(Calendar.DAY_OF_WEEK_IN_MONTH));
-		}
-		
-		for (Entry<Integer, Integer> set :map.entrySet())
+		   return HT.getDay(day)	;
+		}else if (newsPaper instanceof ET)
 		{
-			System.out.println(set.getKey() + " : " + set.getValue());
+			return ET.getDay(day);
 		}
+	    else if (newsPaper instanceof BM)
+	    {
+	    	return BM.getDay(day);
+	    }
+		
+		return 0.0;
 	}
+}
+
+ class TOI extends NewsPaper {
 	
+	public static double MONDAY = 3;
+	public static double TUESDAY = 3;
+	public static double WEDNESDAY = 3;
+	public static double THURSDAY = 3;
+	public static double FRIDAY = 3;
+	public static double SATURDAY = 5;
+	public static double SUNDAY = 6;
 	
-}
-
-enum TOI implements NewsPaper {
-	MONDAY(3), TUESDAY(3), WEDNESDAY(3), THURSDAY(3), FRIDAY(3), SATURDAY(5), SUNDAY(6);
-
-	TOI(double val) {
-
+	public static double getDay(String day)
+	{
+		switch (day)
+		{
+		case "MONDAY" :
+			return MONDAY;
+			
+		case "TUESDAY" :
+			return TUESDAY;
+			
+		case "WEDNESDAY" :
+			return WEDNESDAY;
+			
+		case "THURSDAY" :
+			return THURSDAY;
+			
+		case "FRIDAY" :
+			return FRIDAY;
+			
+		case "SATURDAY" :
+			return SATURDAY;
+			
+		case "SUNDAY":
+			return SUNDAY;
+			
+		default :
+			return 0.0;
+		}	
+		
 	}
-
 }
 
-enum HINDU implements NewsPaper {
-	MONDAY(2.5), TUESDAY(2.5), WEDNESDAY(2.5), THURSDAY(2.5), FRIDAY(2.5), SATURDAY(4), SUNDAY(4);
-
-	HINDU(double val) {
-
+class HINDU extends NewsPaper {
+	
+	public static double MONDAY = 2.5;
+	public static double TUESDAY = 2.5;
+	public static double WEDNESDAY = 2.5;
+	public static double THURSDAY = 2.5;
+	public static double FRIDAY = 2.5;
+	public static double SATURDAY = 4;
+	public static double SUNDAY = 4;
+	
+	public static double getDay(String day)
+	{
+		switch (day)
+		{
+		case "MONDAY" :
+			return MONDAY;
+			
+		case "TUESDAY" :
+			return TUESDAY;
+			
+		case "WEDNESDAY" :
+			return WEDNESDAY;
+			
+		case "THURSDAY" :
+			return THURSDAY;
+			
+		case "FRIDAY" :
+			return FRIDAY;
+			
+		case "SATURDAY" :
+			return SATURDAY;
+			
+		case "SUNDAY":
+			return SUNDAY;
+			
+		default :
+			return 0.0;
+		}	
+		
 	}
-
 }
 
-enum ET implements NewsPaper {
-	MONDAY(2), TUESDAY(2), WEDNESDAY(2), THURSDAY(2), FRIDAY(2), SATURDAY(10), SUNDAY(10);
-
-	ET(double val) {
-
+class ET extends NewsPaper {
+	
+	public static double MONDAY = 2;
+	public static double TUESDAY = 2;
+	public static double WEDNESDAY = 2;
+	public static double THURSDAY = 2;
+	public static double FRIDAY = 2;
+	public static double SATURDAY = 10;
+	public static double SUNDAY = 10;
+	
+	ET(){
+		
 	}
-
-}
-
-enum BM implements NewsPaper {
-	MONDAY(1.5), TUESDAY(1.5), WEDNESDAY(1.5), THURSDAY(1.5), FRIDAY(1.5), SATURDAY(1.5), SUNDAY(1.5);
-
-	BM(double val) {
-
+	public static double getDay(String day)
+	{
+		switch (day)
+		{
+		case "MONDAY" :
+			return MONDAY;
+			
+		case "TUESDAY" :
+			return TUESDAY;
+			
+		case "WEDNESDAY" :
+			return WEDNESDAY;
+			
+		case "THURSDAY" :
+			return THURSDAY;
+			
+		case "FRIDAY" :
+			return FRIDAY;
+			
+		case "SATURDAY" :
+			return SATURDAY;
+			
+		case "SUNDAY":
+			return SUNDAY;
+			
+		default :
+			return 0.0;
+		}	
+		
 	}
-
 }
 
-enum HT implements NewsPaper {
-	MONDAY(2), TUESDAY(2), WEDNESDAY(2), THURSDAY(2), FRIDAY(2), SATURDAY(4), SUNDAY(4);
-
-	HT(double val) {
-
+class BM extends NewsPaper {
+	
+	public static double MONDAY = 1.5;
+	public static double TUESDAY = 1.5;
+	public static double WEDNESDAY = 1.5;
+	public static double THURSDAY = 1.5;
+	public static double FRIDAY = 1.5;
+	public static double SATURDAY = 1.5;
+	public static double SUNDAY = 1.5;
+	
+	public static double getDay(String day)
+	{
+		switch (day)
+		{
+		case "MONDAY" :
+			return MONDAY;
+			
+		case "TUESDAY" :
+			return TUESDAY;
+			
+		case "WEDNESDAY" :
+			return WEDNESDAY;
+			
+		case "THURSDAY" :
+			return THURSDAY;
+			
+		case "FRIDAY" :
+			return FRIDAY;
+			
+		case "SATURDAY" :
+			return SATURDAY;
+			
+		case "SUNDAY":
+			return SUNDAY;
+			
+		default :
+			return 0.0;
+		}	
+		
 	}
-
 }
+
+
+class HT extends NewsPaper {
+	
+	public static double MONDAY = 2;
+	public static double TUESDAY = 2;
+	public static double WEDNESDAY = 2;
+	public static double THURSDAY = 2;
+	public static double FRIDAY = 2;
+	public static double SATURDAY = 2;
+	public static double SUNDAY = 2;
+	
+	public static double getDay(String day)
+	{
+		switch (day)
+		{
+		case "MONDAY" :
+			return MONDAY;
+			
+		case "TUESDAY" :
+			return TUESDAY;
+			
+		case "WEDNESDAY" :
+			return WEDNESDAY;
+			
+		case "THURSDAY" :
+			return THURSDAY;
+			
+		case "FRIDAY" :
+			return FRIDAY;
+			
+		case "SATURDAY" :
+			return SATURDAY;
+			
+		case "SUNDAY":
+			return SUNDAY;
+			
+		default :
+			return 0.0;
+		}	
+		
+	}
+}
+
